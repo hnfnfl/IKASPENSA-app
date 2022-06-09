@@ -1,4 +1,4 @@
-package com.example.ikaspensa
+package com.jaylangkung.ikaspensa
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

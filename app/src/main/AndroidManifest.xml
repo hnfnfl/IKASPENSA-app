@@ -16,7 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IKASPENSA">
         <activity
-            android:name=".MainActivity"
+            android:name=".auth.LoginWebAppActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.jaylangkung.ikaspensa.MainActivity" />
     </application>
 
 </manifest>

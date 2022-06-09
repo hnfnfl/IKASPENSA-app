@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">IKASPENSA</string>
+    <string name="app_logo">logo app</string>
+    <string name="token_auth">Bearer %1$s</string>
+
+    <string name="greetings">%1$s, \n%2$s</string>
+
+    <string name="try_again">Silahkan coba lagi</string>
+    <string name="error_logger">Error Logger</string>
+    <string name="btn_back">tombol kembali</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login_title">Masuk ke akun kamu</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="btn_login">Masuk</string>
+    <string name="email_cant_empty">Email tidak boleh kosong</string>
+    <string name="email_format_error">Format email salah</string>
+    <string name="password_cant_empty">Kata sandi tidak boleh kosong</string>
+    <string name="copyright">Copyright © 2022 jaylangkung.co.id</string>
+    <string name="login_webapp">Login Web App</string>
+    <string name="btn_notification">tombol notifikasi</string>
+    <string name="btn_setting">tombol pengaturan</string>
 </resources>
