@@ -8,8 +8,9 @@ import android.os.Looper
 import android.provider.Settings
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ikaspensa.databinding.ActivitySplashScreenBinding
 import com.jaylangkung.ikaspensa.auth.LoginActivity
+import com.jaylangkung.ikaspensa.databinding.ActivitySplashScreenBinding
+import com.jaylangkung.ikaspensa.main.MainActivity
 import com.jaylangkung.ikaspensa.retrofit.AuthService
 import com.jaylangkung.ikaspensa.retrofit.RetrofitClient
 import com.jaylangkung.ikaspensa.retrofit.response.LoginResponse
@@ -55,7 +56,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     if (response.body()!!.status == "success") {
                         myPreferences.setValue(Constants.TokenAuth, response.body()!!.tokenAuth)
-                        startActivity(Intent(this@SplashScreenActivity, com.jaylangkung.ikaspensa.MainActivity::class.java))
+                        startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
                         finish()
                     }
                 } else {

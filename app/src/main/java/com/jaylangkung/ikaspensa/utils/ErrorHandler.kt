@@ -3,7 +3,7 @@ package com.jaylangkung.ikaspensa.utils
 import android.content.Context
 import android.util.Log
 import androidx.room.Room
-import com.example.ikaspensa.R
+import com.jaylangkung.ikaspensa.R
 import com.jaylangkung.ikaspensa.utils.room.Logger
 import com.jaylangkung.ikaspensa.utils.room.LoggerDatabase
 import es.dmoral.toasty.Toasty

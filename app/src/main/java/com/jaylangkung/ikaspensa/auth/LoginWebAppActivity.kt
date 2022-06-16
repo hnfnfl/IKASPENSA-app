@@ -9,9 +9,10 @@ import android.os.Vibrator
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.budiyev.android.codescanner.*
-import com.example.ikaspensa.R
-import com.example.ikaspensa.databinding.ActivityLoginWebAppBinding
 import com.jaylangkung.brainnet_staff.retrofit.response.DefaultResponse
+import com.jaylangkung.ikaspensa.R
+import com.jaylangkung.ikaspensa.databinding.ActivityLoginWebAppBinding
+import com.jaylangkung.ikaspensa.main.MainActivity
 import com.jaylangkung.ikaspensa.retrofit.DataService
 import com.jaylangkung.ikaspensa.retrofit.RetrofitClient
 import com.jaylangkung.ikaspensa.utils.Constants
@@ -78,7 +79,7 @@ class LoginWebAppActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        startActivity(Intent(this@LoginWebAppActivity, com.jaylangkung.ikaspensa.MainActivity::class.java))
+        startActivity(Intent(this@LoginWebAppActivity, MainActivity::class.java))
         finish()
     }
 

@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
-import com.jaylangkung.ikaspensa.MainActivity
-import com.example.ikaspensa.databinding.ActivityLoggerBinding
+import com.jaylangkung.ikaspensa.databinding.ActivityLoggerBinding
+import com.jaylangkung.ikaspensa.main.MainActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -30,7 +30,7 @@ class LoggerActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        startActivity(Intent(this@LoggerActivity, com.jaylangkung.ikaspensa.MainActivity::class.java))
+        startActivity(Intent(this@LoggerActivity, MainActivity::class.java))
         finish()
     }
 

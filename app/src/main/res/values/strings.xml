@@ -28,4 +28,7 @@
     <string name="login_webapp">Login Web App</string>
     <string name="btn_notification">tombol notifikasi</string>
     <string name="btn_setting">tombol pengaturan</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="currency">Rp %1$s</string>
+
 </resources>

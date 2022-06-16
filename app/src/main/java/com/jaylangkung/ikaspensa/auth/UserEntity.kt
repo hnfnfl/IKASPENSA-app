@@ -1,4 +1,4 @@
-package com.jaylangkung.ikaspensa.retrofit.response
+package com.jaylangkung.ikaspensa.auth
 
 class UserEntity(
     var idadmin: String = "",

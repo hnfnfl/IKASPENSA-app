@@ -5,8 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ikaspensa.R
-import com.example.ikaspensa.databinding.ActivityLoginBinding
+import com.jaylangkung.ikaspensa.R
+import com.jaylangkung.ikaspensa.databinding.ActivityLoginBinding
+import com.jaylangkung.ikaspensa.main.MainActivity
 import com.jaylangkung.ikaspensa.retrofit.AuthService
 import com.jaylangkung.ikaspensa.retrofit.RetrofitClient
 import com.jaylangkung.ikaspensa.retrofit.response.LoginResponse
@@ -82,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
                             myPreferences.setValue(Constants.DEVICE_TOKEN, response.body()!!.data[0].device_token)
                             myPreferences.setValue(Constants.USER_DEPARTMENT, response.body()!!.data[0].departemen)
                             myPreferences.setValue(Constants.TokenAuth, response.body()!!.tokenAuth)
-                            startActivity(Intent(this@LoginActivity, com.jaylangkung.ikaspensa.MainActivity::class.java))
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
                         }
                         "not_exist" -> {
