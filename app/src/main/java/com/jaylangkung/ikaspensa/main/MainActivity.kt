@@ -14,26 +14,33 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.messaging.FirebaseMessaging
-import com.jaylangkung.brainnet_staff.retrofit.response.DefaultResponse
 import com.jaylangkung.ikaspensa.R
 import com.jaylangkung.ikaspensa.auth.LoginWebAppActivity
 import com.jaylangkung.ikaspensa.databinding.ActivityMainBinding
+import com.jaylangkung.ikaspensa.databinding.BottomSheetDepositBinding
+import com.jaylangkung.ikaspensa.databinding.BottomSheetDepositTambahKurangBinding
 import com.jaylangkung.ikaspensa.retrofit.AuthService
 import com.jaylangkung.ikaspensa.retrofit.DataService
 import com.jaylangkung.ikaspensa.retrofit.RetrofitClient
 import com.jaylangkung.ikaspensa.retrofit.response.DashboardResponse
+import com.jaylangkung.ikaspensa.retrofit.response.DefaultResponse
+import com.jaylangkung.ikaspensa.retrofit.response.LoginResponse
 import com.jaylangkung.ikaspensa.utils.Constants
 import com.jaylangkung.ikaspensa.utils.ErrorHandler
 import com.jaylangkung.ikaspensa.utils.MySharedPreferences
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.DecimalFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var bottomSheetDepositBinding: BottomSheetDepositBinding
+    private lateinit var bottomSheetDepositTambahKurangBinding: BottomSheetDepositTambahKurangBinding
     private lateinit var myPreferences: MySharedPreferences
     private lateinit var dashboardAdapter: DashboardAdapter
     private var listData: ArrayList<DashboardEntity> = arrayListOf()
@@ -91,8 +98,73 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
 
-            getDashboard(tokenAuth)
+            btnDeposit.setOnClickListener {
+                bottomSheetDepositBinding = BottomSheetDepositBinding.inflate(layoutInflater)
+                bottomSheetDepositTambahKurangBinding = BottomSheetDepositTambahKurangBinding.inflate(layoutInflater)
+
+                val dialog = BottomSheetDialog(this@MainActivity)
+                val subDialog = BottomSheetDialog(this@MainActivity)
+
+                dialog.setCancelable(true)
+                dialog.setContentView(bottomSheetDepositBinding.root)
+                dialog.show()
+
+                bottomSheetDepositBinding.apply {
+                    llAddDeposit.setOnClickListener {
+                        subDialog.setCancelable(true)
+                        subDialog.setContentView(bottomSheetDepositTambahKurangBinding.root)
+                        subDialog.show()
+
+                        bottomSheetDepositTambahKurangBinding.apply {
+                            btnSave.progressText = "Tambahkan Deposit"
+
+                            btnSave.setOnClickListener {
+                                btnSave.startAnimation()
+                                subDialog.dismiss()
+                            }
+                        }
+                        subDialog.setOnDismissListener {
+                            dialog.show()
+                        }
+
+                        dialog.dismiss()
+                    }
+
+                    llSubtractDeposit.setOnClickListener {
+                        subDialog.setCancelable(true)
+                        subDialog.setContentView(bottomSheetDepositTambahKurangBinding.root)
+                        subDialog.show()
+
+                        bottomSheetDepositTambahKurangBinding.apply {
+                            layoutKeterangan.visibility = View.VISIBLE
+                            btnSave.progressText = "Kurangi Deposit"
+
+                            btnSave.setOnClickListener {
+                                btnSave.startAnimation()
+                                subDialog.dismiss()
+                            }
+                        }
+
+                        subDialog.setOnDismissListener {
+                            dialog.show()
+                        }
+
+                        dialog.dismiss()
+                    }
+
+                    llHistoryDeposit.setOnClickListener {
+                        dialog.dismiss()
+                    }
+                }
+            }
+
+            llAddSumbangan.setOnClickListener {
+
+            }
         }
+
+        getDashboard(tokenAuth)
+        getSaldo(idadmin, tokenAuth)
     }
 
     private fun insertToken(idadmin: String, device_token: String) {
@@ -155,6 +227,33 @@ class MainActivity : AppCompatActivity() {
                 ErrorHandler().responseHandler(
                     this@MainActivity,
                     "getDashboard | onFailure", t.message.toString()
+                )
+            }
+        })
+    }
+
+    private fun getSaldo(idadmin: String, tokenAuth: String) {
+        val service = RetrofitClient().apiRequest().create(DataService::class.java)
+        service.getSaldo(idadmin, tokenAuth).enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful) {
+                    if (response.body()!!.status == "success") {
+                        val formatter = DecimalFormat("#,###.#")
+                        val saldo = response.body()!!.data[0].saldo.toInt()
+                        binding.saldo.text = getString(R.string.currency, formatter.format(saldo))
+                    }
+                } else {
+                    ErrorHandler().responseHandler(
+                        this@MainActivity,
+                        "getSaldo | onResponse", response.message()
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                ErrorHandler().responseHandler(
+                    this@MainActivity,
+                    "getSaldo | onFailure", t.message.toString()
                 )
             }
         })

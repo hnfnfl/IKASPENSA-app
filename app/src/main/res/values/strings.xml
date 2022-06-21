@@ -30,5 +30,19 @@
     <string name="btn_setting">tombol pengaturan</string>
     <string name="dashboard">Dashboard</string>
     <string name="currency">Rp %1$s</string>
+    <string name="icon_tambahkan_deposit">icon tambahkan deposit</string>
+    <string name="tambahkan_deposit">Tambahkan Deposit</string>
+    <string name="icon_kurangi_deposit">icon kurangi deposit</string>
+    <string name="kurangi_deposit">Kurangi Deposit</string>
+    <string name="icon_riwayat_deposit">icon riwayat deposit</string>
+    <string name="riwayat_deposit">Riwayat Deposit</string>
+    <string name="saldo_anda_saat_ini">Saldo Anda saat ini</string>
+    <string name="icon_deposit">icon deposit</string>
+    <string name="deposit">Deposit</string>
+    <string name="icon_tambah_sumbangan">icon tambah sumbangan</string>
+    <string name="tambah_sumbangan">Tambah Sumbangan</string>
+    <string name="btn_save">Simpan</string>
+    <string name="keterangan">Keterangan</string>
+    <string name="jumlah">Jumlah</string>
 
 </resources>

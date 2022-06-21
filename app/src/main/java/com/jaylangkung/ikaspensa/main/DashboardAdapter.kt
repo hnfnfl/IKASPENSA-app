@@ -24,7 +24,14 @@ class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.ItemHolder>() {
                 val formatter = DecimalFormat("#,###.#")
                 tvJudul.text = item.judul
                 try {
-                    tvIsi.text = itemView.context.getString(R.string.currency, formatter.format(item.isi.toInt()))
+                    if (item.judul == "Pemasukan" || item.judul == "Pengeluaran" || item.judul == "Iuran Wajib" ||
+                        item.judul == "Tunggakan Iuran Wajib" || item.judul == "Deposit" || item.judul == "Sumbangan"
+                    ) {
+                        tvIsi.text = itemView.context.getString(R.string.currency, formatter.format(item.isi.toInt()))
+                    } else {
+                        tvIsi.text = item.isi
+                    }
+
                 } catch (e: IllegalArgumentException) {
                     tvIsi.text = item.isi
                 }

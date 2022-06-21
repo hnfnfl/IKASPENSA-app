@@ -11,4 +11,5 @@ class UserEntity(
     var img: String = "",
     var device_token: String = "",
     var departemen: String = "",
+    var saldo: String = "",
 )

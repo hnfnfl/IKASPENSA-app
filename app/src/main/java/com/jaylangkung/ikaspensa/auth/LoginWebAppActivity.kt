@@ -9,7 +9,7 @@ import android.os.Vibrator
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.budiyev.android.codescanner.*
-import com.jaylangkung.brainnet_staff.retrofit.response.DefaultResponse
+import com.jaylangkung.ikaspensa.retrofit.response.DefaultResponse
 import com.jaylangkung.ikaspensa.R
 import com.jaylangkung.ikaspensa.databinding.ActivityLoginWebAppBinding
 import com.jaylangkung.ikaspensa.main.MainActivity
