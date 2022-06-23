@@ -21,6 +21,7 @@ import com.jaylangkung.ikaspensa.auth.LoginWebAppActivity
 import com.jaylangkung.ikaspensa.databinding.ActivityMainBinding
 import com.jaylangkung.ikaspensa.databinding.BottomSheetDepositBinding
 import com.jaylangkung.ikaspensa.databinding.BottomSheetDepositTambahKurangBinding
+import com.jaylangkung.ikaspensa.deposit.HistoryDepositActivity
 import com.jaylangkung.ikaspensa.retrofit.AuthService
 import com.jaylangkung.ikaspensa.retrofit.DataService
 import com.jaylangkung.ikaspensa.retrofit.RetrofitClient
@@ -153,6 +154,8 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     llHistoryDeposit.setOnClickListener {
+                        startActivity(Intent(this@MainActivity, HistoryDepositActivity::class.java))
+                        finish()
                         dialog.dismiss()
                     }
                 }

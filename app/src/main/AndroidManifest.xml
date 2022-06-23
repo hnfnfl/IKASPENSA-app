@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IKASPENSA">
         <activity
+            android:name=".deposit.HistoryDepositActivity"
+            android:exported="false" />
+        <activity
             android:name=".auth.LoginWebAppActivity"
             android:exported="false" />
         <activity
@@ -30,7 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.jaylangkung.ikaspensa.main.MainActivity" />
+        <activity android:name=".main.MainActivity" />
     </application>
 
 </manifest>
