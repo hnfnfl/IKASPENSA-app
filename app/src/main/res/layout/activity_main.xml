@@ -33,21 +33,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/btn_setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="6dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/btn_setting"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_setting"
-        app:layout_constraintBottom_toTopOf="@+id/ll_body"
-        app:layout_constraintEnd_toStartOf="@+id/btn_notification"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
-
-    <ImageButton
         android:id="@+id/btn_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,195 +46,188 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/ll_body"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="80dp"
-        android:background="@drawable/home_bg"
-        android:padding="18dp"
-        android:scrollbars="none">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/text_dashboard"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:drawablePadding="8dp"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="@string/dashboard"
-                            android:textColor="@color/black"
-                            android:textSize="18sp"
-                            app:drawableStartCompat="@drawable/ic_dashboard"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_dashboard"
-                            android:layout_width="match_parent"
-                            android:layout_height="250dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/text_dashboard"
-                            tools:listitem="@layout/item_dashboard" />
-
-                        <com.github.ybq.android.spinkit.SpinKitView
-                            android:id="@+id/loading_anim"
-                            style="@style/SpinKitView.Large.ThreeBounce"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            app:SpinKit_Color="@color/secondaryLightColor"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent"
+            android:background="@drawable/home_bg"
+            android:padding="18dp"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
                 android:orientation="vertical">
 
-                <TextView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/saldo_anda_saat_ini"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/saldo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="24sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:id="@+id/btn_deposit"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/menu_box"
-                    android:backgroundTint="@color/primaryColor"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/text_dashboard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/menu_box"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="6dp">
+                        android:layout_marginBottom="8dp"
+                        android:drawablePadding="8dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/dashboard"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        app:drawableStartCompat="@drawable/ic_dashboard"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/icon_deposit"
-                            android:src="@drawable/ic_atm"
-                            app:tint="@color/primaryDarkColor" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_dashboard"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_dashboard"
+                        tools:listitem="@layout/item_dashboard" />
 
-                    </LinearLayout>
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        android:id="@+id/loading_anim"
+                        style="@style/SpinKitView.Large.ThreeBounce"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:SpinKit_Color="@color/secondaryLightColor"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-medium"
                         android:gravity="center"
-                        android:text="@string/deposit"
-                        android:textColor="@color/white"
+                        android:text="@string/saldo_anda_saat_ini"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_add_sumbangan"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/menu_box"
-                    android:backgroundTint="@color/primaryColor"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/menu_box"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="6dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:contentDescription="@string/icon_tambah_sumbangan"
-                            android:src="@drawable/ic_add"
-                            app:tint="@color/primaryDarkColor" />
-
-                    </LinearLayout>
-
                     <TextView
+                        android:id="@+id/saldo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
                         android:gravity="center"
-                        android:text="@string/tambah_sumbangan"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textColor="@color/black"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:id="@+id/btn_deposit"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/menu_box"
+                        android:backgroundTint="@color/primaryColor"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/menu_box"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="6dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@string/icon_deposit"
+                                android:src="@drawable/ic_atm"
+                                app:tint="@color/primaryDarkColor" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:text="@string/deposit"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_add_sumbangan"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/menu_box"
+                        android:backgroundTint="@color/primaryColor"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/menu_box"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="6dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@string/icon_tambah_sumbangan"
+                                android:src="@drawable/ic_add"
+                                app:tint="@color/primaryDarkColor" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:text="@string/tambah_sumbangan"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-    </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/fab_login_web_app"

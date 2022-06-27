@@ -2,9 +2,11 @@ package com.jaylangkung.ikaspensa.retrofit
 
 import com.jaylangkung.ikaspensa.retrofit.response.DefaultResponse
 import com.jaylangkung.ikaspensa.retrofit.response.LoginResponse
+import com.jaylangkung.ikaspensa.retrofit.response.SpinnerDataResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface AuthService {
@@ -40,4 +42,8 @@ interface AuthService {
         @Field("idadmin") idadmin: String,
     ): Call<DefaultResponse>
 
+
+    @GET("auth/getSpinnerData")
+    fun getSpinnerData(
+    ): Call<SpinnerDataResponse>
 }

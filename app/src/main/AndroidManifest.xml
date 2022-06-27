@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IKASPENSA">
         <activity
+            android:name=".notifikasi.NotifikasiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".sumbangan.SumbanganActivity"
+            android:exported="false" />
+        <activity
             android:name=".deposit.HistoryDepositActivity"
             android:exported="false" />
         <activity

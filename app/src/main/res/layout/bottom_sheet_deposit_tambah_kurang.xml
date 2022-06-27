@@ -41,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/white"
                 android:hint="@string/jumlah"
-                android:inputType="text" />
+                android:inputType="numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -22,15 +22,18 @@ import com.jaylangkung.ikaspensa.databinding.ActivityMainBinding
 import com.jaylangkung.ikaspensa.databinding.BottomSheetDepositBinding
 import com.jaylangkung.ikaspensa.databinding.BottomSheetDepositTambahKurangBinding
 import com.jaylangkung.ikaspensa.deposit.HistoryDepositActivity
+import com.jaylangkung.ikaspensa.notifikasi.NotifikasiActivity
 import com.jaylangkung.ikaspensa.retrofit.AuthService
 import com.jaylangkung.ikaspensa.retrofit.DataService
 import com.jaylangkung.ikaspensa.retrofit.RetrofitClient
 import com.jaylangkung.ikaspensa.retrofit.response.DashboardResponse
 import com.jaylangkung.ikaspensa.retrofit.response.DefaultResponse
 import com.jaylangkung.ikaspensa.retrofit.response.LoginResponse
+import com.jaylangkung.ikaspensa.sumbangan.SumbanganActivity
 import com.jaylangkung.ikaspensa.utils.Constants
 import com.jaylangkung.ikaspensa.utils.ErrorHandler
 import com.jaylangkung.ikaspensa.utils.MySharedPreferences
+import es.dmoral.toasty.Toasty
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -65,6 +68,8 @@ class MainActivity : AppCompatActivity() {
 
         val nama = myPreferences.getValue(Constants.USER_NAMA)
         val idadmin = myPreferences.getValue(Constants.USER_IDADMIN).toString()
+        val idalumnus = myPreferences.getValue(Constants.USER_IDALUMNUS).toString()
+        val idaktivasi = myPreferences.getValue(Constants.USER_IDAKTIVASI).toString()
         val tokenAuth = getString(R.string.token_auth, myPreferences.getValue(Constants.TokenAuth).toString())
         val foto = myPreferences.getValue(Constants.USER_IMG).toString()
 
@@ -94,6 +99,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.apply {
+            llBody.setOnRefreshListener {
+                binding.loadingAnim.visibility = View.VISIBLE
+                getDashboard(tokenAuth)
+                getSaldo(idadmin, tokenAuth)
+            }
+
+            btnNotification.setOnClickListener {
+                startActivity(Intent(this@MainActivity, NotifikasiActivity::class.java))
+                finish()
+            }
+
             fabLoginWebApp.setOnClickListener {
                 startActivity(Intent(this@MainActivity, LoginWebAppActivity::class.java))
                 finish()
@@ -117,11 +133,13 @@ class MainActivity : AppCompatActivity() {
                         subDialog.show()
 
                         bottomSheetDepositTambahKurangBinding.apply {
+                            layoutKeterangan.visibility = View.GONE
                             btnSave.progressText = "Tambahkan Deposit"
 
                             btnSave.setOnClickListener {
+                                val jumlah = inputJumlah.text.toString()
                                 btnSave.startAnimation()
-                                subDialog.dismiss()
+                                addDeposit(jumlah, idaktivasi, idalumnus, idadmin, tokenAuth, subDialog)
                             }
                         }
                         subDialog.setOnDismissListener {
@@ -141,8 +159,10 @@ class MainActivity : AppCompatActivity() {
                             btnSave.progressText = "Kurangi Deposit"
 
                             btnSave.setOnClickListener {
+                                val jumlah = inputJumlah.text.toString()
+                                val keterangan = inputKeterangan.text.toString()
                                 btnSave.startAnimation()
-                                subDialog.dismiss()
+                                subtractDeposit(jumlah, idaktivasi, idalumnus, keterangan, idadmin, tokenAuth, subDialog)
                             }
                         }
 
@@ -162,7 +182,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             llAddSumbangan.setOnClickListener {
-
+                startActivity(Intent(this@MainActivity, SumbanganActivity::class.java))
+                finish()
             }
         }
 
@@ -200,6 +221,7 @@ class MainActivity : AppCompatActivity() {
         service.getDashboard(tokenAuth).enqueue(object : Callback<DashboardResponse> {
             override fun onResponse(call: Call<DashboardResponse>, response: Response<DashboardResponse>) {
                 if (response.isSuccessful) {
+                    binding.llBody.isRefreshing = false
                     if (response.body()!!.status == "success") {
                         binding.loadingAnim.visibility = View.GONE
                         listData = response.body()!!.data
@@ -240,6 +262,7 @@ class MainActivity : AppCompatActivity() {
         service.getSaldo(idadmin, tokenAuth).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
+                    binding.llBody.isRefreshing = false
                     if (response.body()!!.status == "success") {
                         val formatter = DecimalFormat("#,###.#")
                         val saldo = response.body()!!.data[0].saldo.toInt()
@@ -257,6 +280,73 @@ class MainActivity : AppCompatActivity() {
                 ErrorHandler().responseHandler(
                     this@MainActivity,
                     "getSaldo | onFailure", t.message.toString()
+                )
+            }
+        })
+    }
+
+    private fun addDeposit(
+        jumlah: String,
+        idaktivasi: String,
+        idalumnus: String,
+        idadmin: String,
+        tokenAuth: String,
+        dialog: BottomSheetDialog
+    ) {
+        val service = RetrofitClient().apiRequest().create(DataService::class.java)
+        service.addDeposit(jumlah, idaktivasi, idalumnus, idadmin, tokenAuth).enqueue(object : Callback<DefaultResponse> {
+            override fun onResponse(call: Call<DefaultResponse>, response: Response<DefaultResponse>) {
+                if (response.isSuccessful) {
+                    if (response.body()!!.status == "success") {
+                        dialog.dismiss()
+                        Toasty.success(this@MainActivity, "Berhasil menambahkan deposit", Toasty.LENGTH_SHORT).show()
+                    }
+                } else {
+                    ErrorHandler().responseHandler(
+                        this@MainActivity,
+                        "addDeposit | onResponse", response.message()
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                ErrorHandler().responseHandler(
+                    this@MainActivity,
+                    "addDeposit | onFailure", t.message.toString()
+                )
+            }
+        })
+    }
+
+    private fun subtractDeposit(
+        jumlah: String,
+        idaktivasi: String,
+        idalumnus: String,
+        keterangan: String,
+        idadmin: String,
+        tokenAuth: String,
+        dialog: BottomSheetDialog
+    ) {
+        val service = RetrofitClient().apiRequest().create(DataService::class.java)
+        service.subtractDeposit(jumlah, idaktivasi, idalumnus, keterangan, idadmin, tokenAuth).enqueue(object : Callback<DefaultResponse> {
+            override fun onResponse(call: Call<DefaultResponse>, response: Response<DefaultResponse>) {
+                if (response.isSuccessful) {
+                    if (response.body()!!.status == "success") {
+                        dialog.dismiss()
+                        Toasty.success(this@MainActivity, "Berhasil mengurangi deposit", Toasty.LENGTH_SHORT).show()
+                    }
+                } else {
+                    ErrorHandler().responseHandler(
+                        this@MainActivity,
+                        "subtractDeposit | onResponse", response.message()
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                ErrorHandler().responseHandler(
+                    this@MainActivity,
+                    "subtractDeposit | onFailure", t.message.toString()
                 )
             }
         })

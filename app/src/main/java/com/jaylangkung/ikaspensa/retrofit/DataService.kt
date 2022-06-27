@@ -1,9 +1,6 @@
 package com.jaylangkung.ikaspensa.retrofit
 
-import com.jaylangkung.ikaspensa.retrofit.response.DashboardResponse
-import com.jaylangkung.ikaspensa.retrofit.response.DefaultResponse
-import com.jaylangkung.ikaspensa.retrofit.response.DepositResponse
-import com.jaylangkung.ikaspensa.retrofit.response.LoginResponse
+import com.jaylangkung.ikaspensa.retrofit.response.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -44,6 +41,7 @@ interface DataService {
         @Field("jumlah") jumlah: String,
         @Field("idaktivasi") idaktivasi: String,
         @Field("idalumnus") idalumnus: String,
+        @Field("keterangan") keterangan: String,
         @Field("idadmin") idadmin: String,
         @Header("Authorization") tokenAuth: String
     ): Call<DefaultResponse>
@@ -54,4 +52,21 @@ interface DataService {
         @Field("idalumnus") idalumnus: String,
         @Header("Authorization") tokenAuth: String
     ): Call<DepositResponse>
+
+    @FormUrlEncoded
+    @POST("main/addSumbangan")
+    fun addSumbangan(
+        @Field("jumlah") jumlah: String,
+        @Field("idsumbangan_jenis") idsumbangan_jenis: String,
+        @Field("idaktivasi") idaktivasi: String,
+        @Field("idalumnus") idalumnus: String,
+        @Field("keterangan") keterangan: String,
+        @Field("idadmin") idadmin: String,
+        @Header("Authorization") tokenAuth: String
+    ): Call<DefaultResponse>
+
+    @POST("main/getNotification")
+    fun getNotification(
+        @Header("Authorization") tokenAuth: String
+    ): Call<NotifikasiResponse>
 }

@@ -48,5 +48,7 @@
     <string name="deposit_nominal_tambah">Nominal: +Rp %1$s</string>
     <string name="deposit_nominal_kurang">Nominal: -Rp %1$s</string>
     <string name="deposit_status">Status: %1$s</string>
+    <string name="sumbangan">Tambah Sumbangan</string>
+    <string name="notifikasi">Notifikasi</string>
 
 </resources>

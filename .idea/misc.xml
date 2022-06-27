@@ -10,7 +10,9 @@
         <entry key="..\:/Work Pak Eko/IKASPENSA/ikaspensa app/app/src/main/res/drawable/ic_dashboard.xml" value="0.27870370370370373" />
         <entry key="..\:/Work Pak Eko/IKASPENSA/ikaspensa app/app/src/main/res/drawable/menu_box.xml" value="0.2722222222222222" />
         <entry key="..\:/Work Pak Eko/IKASPENSA/ikaspensa app/app/src/main/res/layout/activity_history_deposit.xml" value="0.36666666666666664" />
-        <entry key="..\:/Work Pak Eko/IKASPENSA/ikaspensa app/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Work Pak Eko/IKASPENSA/ikaspensa app/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Work Pak Eko/IKASPENSA/ikaspensa app/app/src/main/res/layout/activity_notifikasi.xml" value="0.26403985507246375" />
+        <entry key="..\:/Work Pak Eko/IKASPENSA/ikaspensa app/app/src/main/res/layout/activity_sumbangan.xml" value="0.33" />
         <entry key="..\:/Work Pak Eko/IKASPENSA/ikaspensa app/app/src/main/res/layout/bottom_sheet_deposit.xml" value="0.3418230563002681" />
         <entry key="..\:/Work Pak Eko/IKASPENSA/ikaspensa app/app/src/main/res/layout/bottom_sheet_deposit_tambah_kurang.xml" value="0.26856884057971014" />
         <entry key="..\:/Work Pak Eko/IKASPENSA/ikaspensa app/app/src/main/res/layout/item_dashboard.xml" value="0.33" />
@@ -20,5 +22,5 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="17" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="17" project-jdk-type="JavaSDK" />
 </project>
