@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.messaging.FirebaseMessaging
 import com.jaylangkung.ikaspensa.R
+import com.jaylangkung.ikaspensa.alumni.AlumniActivity
 import com.jaylangkung.ikaspensa.auth.LoginWebAppActivity
 import com.jaylangkung.ikaspensa.databinding.ActivityMainBinding
 import com.jaylangkung.ikaspensa.databinding.BottomSheetDepositBinding
@@ -181,8 +182,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            llAddSumbangan.setOnClickListener {
+            btnAddSumbangan.setOnClickListener {
                 startActivity(Intent(this@MainActivity, SumbanganActivity::class.java))
+                finish()
+            }
+
+            btnAlumni.setOnClickListener {
+                startActivity(Intent(this@MainActivity, AlumniActivity::class.java))
                 finish()
             }
         }

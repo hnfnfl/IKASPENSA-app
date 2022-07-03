@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.LoginWebAppActivity">
+    tools:context=".alumni.AlumniActivity">
 
     <LinearLayout
         android:id="@+id/ll_header"
@@ -13,7 +13,7 @@
         android:layout_marginHorizontal="24dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/scanner_view"
+        app:layout_constraintBottom_toTopOf="@+id/sv_product"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -33,45 +33,60 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@string/login_webapp"
+            android:text="@string/alumni"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
     </LinearLayout>
 
-    <com.budiyev.android.codescanner.CodeScannerView
-        android:id="@+id/scanner_view"
+    <SearchView
+        android:id="@+id/sv_alumni"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/bg_searchview"
+        android:iconifiedByDefault="false"
+        android:padding="8dp"
+        android:queryHint="Cari Alumni"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_alumni"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
-        app:autoFocusButtonColor="@android:color/white"
-        app:autoFocusButtonVisible="true"
-        app:flashButtonColor="@android:color/white"
-        app:flashButtonVisible="true"
-        app:frameAspectRatioHeight="1"
-        app:frameAspectRatioWidth="1"
-        app:frameColor="@android:color/white"
-        app:frameCornersRadius="8dp"
-        app:frameCornersSize="50dp"
-        app:frameSize="0.75"
-        app:frameThickness="3dp"
+        android:layout_marginTop="120dp"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:maskColor="#99427BBD" />
+        app:layout_constraintTop_toBottomOf="@+id/sv_alumni"
+        tools:listitem="@layout/item_alumni" />
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/loading_anim"
         style="@style/SpinKitView.Large.ThreeBounce"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
         app:SpinKit_Color="@color/secondaryLightColor"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_alumni"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scanner_view" />
+        app:layout_constraintTop_toTopOf="@+id/rv_alumni" />
+
+    <ImageView
+        android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/icon_warning"
+        android:src="@drawable/ic_empty"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_alumni"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rv_alumni" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IKASPENSA">
         <activity
+            android:name=".alumni.AlumniActivity"
+            android:exported="false" />
+        <activity
             android:name=".notifikasi.NotifikasiActivity"
             android:exported="false" />
         <activity

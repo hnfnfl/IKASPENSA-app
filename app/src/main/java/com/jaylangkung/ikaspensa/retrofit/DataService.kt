@@ -18,6 +18,11 @@ interface DataService {
         @Header("Authorization") tokenAuth: String
     ): Call<DashboardResponse>
 
+    @GET("main/getAlumni")
+    fun getAlumni(
+        @Header("Authorization") tokenAuth: String
+    ): Call<AlumniResponse>
+
     @FormUrlEncoded
     @POST("main/getSaldo")
     fun getSaldo(

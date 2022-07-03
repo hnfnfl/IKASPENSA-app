@@ -50,5 +50,11 @@
     <string name="deposit_status">Status: %1$s</string>
     <string name="sumbangan">Tambah Sumbangan</string>
     <string name="notifikasi">Notifikasi</string>
+    <string name="alumni_kelas">(%1$s)</string>
+    <string name="alumni_umur">(%1$s tahun)</string>
+    <string name="hidup">Hidup</string>
+    <string name="meninggal">Meninggal</string>
+    <string name="alumni">Alumni</string>
+    <string name="icon_alumni">icon daftar alumni</string>
 
 </resources>
