@@ -33,6 +33,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
+        android:id="@+id/btn_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/btn_setting"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_setting"
+        app:layout_constraintBottom_toTopOf="@+id/ll_body"
+        app:layout_constraintEnd_toStartOf="@+id/btn_notification"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <ImageButton
         android:id="@+id/btn_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

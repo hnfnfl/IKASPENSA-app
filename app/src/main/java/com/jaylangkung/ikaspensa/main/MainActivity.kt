@@ -30,6 +30,7 @@ import com.jaylangkung.ikaspensa.retrofit.RetrofitClient
 import com.jaylangkung.ikaspensa.retrofit.response.DashboardResponse
 import com.jaylangkung.ikaspensa.retrofit.response.DefaultResponse
 import com.jaylangkung.ikaspensa.retrofit.response.LoginResponse
+import com.jaylangkung.ikaspensa.setting.SettingActivity
 import com.jaylangkung.ikaspensa.sumbangan.SumbanganActivity
 import com.jaylangkung.ikaspensa.utils.Constants
 import com.jaylangkung.ikaspensa.utils.ErrorHandler
@@ -104,6 +105,11 @@ class MainActivity : AppCompatActivity() {
                 binding.loadingAnim.visibility = View.VISIBLE
                 getDashboard(tokenAuth)
                 getSaldo(idadmin, tokenAuth)
+            }
+
+            btnSetting.setOnClickListener {
+                startActivity(Intent(this@MainActivity, SettingActivity::class.java))
+                finish()
             }
 
             btnNotification.setOnClickListener {

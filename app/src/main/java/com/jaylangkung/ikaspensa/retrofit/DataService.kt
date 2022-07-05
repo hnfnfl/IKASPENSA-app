@@ -74,4 +74,15 @@ interface DataService {
     fun getNotification(
         @Header("Authorization") tokenAuth: String
     ): Call<NotifikasiResponse>
+
+    @FormUrlEncoded
+    @POST("main/updateProfile")
+    fun updateProfile(
+        @Field("nama") nama: String,
+        @Field("alamat") alamat: String,
+        @Field("email") email: String,
+        @Field("telp") telp: String,
+        @Field("idadmin") idadmin: String,
+        @Header("Authorization") tokenAuth: String
+    ): Call<DefaultResponse>
 }

@@ -56,5 +56,10 @@
     <string name="meninggal">Meninggal</string>
     <string name="alumni">Alumni</string>
     <string name="icon_alumni">icon daftar alumni</string>
+    <string name="nama">Nama</string>
+    <string name="alamat">Alamat</string>
+    <string name="save">Simpan</string>
+    <string name="setting">Pengaturan</string>
+    <string name="no_telp">No Telp</string>
 
 </resources>
