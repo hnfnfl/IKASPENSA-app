@@ -52,7 +52,7 @@ class SettingActivity : AppCompatActivity() {
                     val telpEdit = inputTelp.text.toString()
                     val emailEdit = inputEmail.text.toString()
 
-                    updateProfile(namaEdit, alamatEdit, telpEdit, emailEdit, idadmin, tokenAuth)
+                    updateProfile(namaEdit, alamatEdit, emailEdit, telpEdit, idadmin, tokenAuth)
                 }
             }
         }
