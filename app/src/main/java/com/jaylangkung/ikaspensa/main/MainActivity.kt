@@ -18,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.messaging.FirebaseMessaging
 import com.jaylangkung.ikaspensa.R
 import com.jaylangkung.ikaspensa.alumni.AlumniActivity
+import com.jaylangkung.ikaspensa.auth.LoginActivity
 import com.jaylangkung.ikaspensa.auth.LoginWebAppActivity
 import com.jaylangkung.ikaspensa.databinding.ActivityMainBinding
 import com.jaylangkung.ikaspensa.databinding.BottomSheetDepositBinding
@@ -35,6 +36,7 @@ import com.jaylangkung.ikaspensa.sumbangan.SumbanganActivity
 import com.jaylangkung.ikaspensa.utils.Constants
 import com.jaylangkung.ikaspensa.utils.ErrorHandler
 import com.jaylangkung.ikaspensa.utils.MySharedPreferences
+import dev.shreyaspatil.MaterialDialog.MaterialDialog
 import es.dmoral.toasty.Toasty
 import retrofit2.Call
 import retrofit2.Callback
@@ -196,6 +198,40 @@ class MainActivity : AppCompatActivity() {
             btnAlumni.setOnClickListener {
                 startActivity(Intent(this@MainActivity, AlumniActivity::class.java))
                 finish()
+            }
+
+            btnLogout.setOnClickListener {
+                val mDialog = MaterialDialog.Builder(this@MainActivity)
+                    .setTitle("Logout")
+                    .setMessage(getString(R.string.confirm_logout))
+                    .setCancelable(true)
+                    .setPositiveButton(
+                        getString(R.string.no), R.drawable.ic_close
+                    ) { dialogInterface, _ ->
+                        dialogInterface.dismiss()
+                    }
+                    .setNegativeButton(
+                        getString(R.string.yes), R.drawable.ic_logout
+                    ) { dialogInterface, _ ->
+                        myPreferences.setValue(Constants.USER, "")
+                        myPreferences.setValue(Constants.USER_IDADMIN, "")
+                        myPreferences.setValue(Constants.USER_EMAIL, "")
+                        myPreferences.setValue(Constants.USER_NAMA, "")
+                        myPreferences.setValue(Constants.USER_ALAMAT, "")
+                        myPreferences.setValue(Constants.USER_TELP, "")
+                        myPreferences.setValue(Constants.USER_IDAKTIVASI, "")
+                        myPreferences.setValue(Constants.USER_IMG, "")
+                        myPreferences.setValue(Constants.DEVICE_TOKEN, "")
+                        myPreferences.setValue(Constants.USER_DEPARTMENT, "")
+                        myPreferences.setValue(Constants.TokenAuth, "")
+                        logout(idadmin)
+                        startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                        finish()
+                        dialogInterface.dismiss()
+                    }
+                    .build()
+
+                mDialog.show()
             }
         }
 
@@ -359,6 +395,31 @@ class MainActivity : AppCompatActivity() {
                 ErrorHandler().responseHandler(
                     this@MainActivity,
                     "subtractDeposit | onFailure", t.message.toString()
+                )
+            }
+        })
+    }
+
+    private fun logout(idadmin: String) {
+        val service = RetrofitClient().apiRequest().create(AuthService::class.java)
+        service.logout(idadmin).enqueue(object : Callback<DefaultResponse> {
+            override fun onResponse(call: Call<DefaultResponse>, response: Response<DefaultResponse>) {
+                if (response.isSuccessful) {
+                    if (response.body()!!.status == "success") {
+                        Toasty.success(this@MainActivity, "Berhasil Logout", Toasty.LENGTH_LONG).show()
+                    }
+                } else {
+                    ErrorHandler().responseHandler(
+                        this@MainActivity,
+                        "logout | onResponse", response.message()
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                ErrorHandler().responseHandler(
+                    this@MainActivity,
+                    "logout | onFailure", t.message.toString()
                 )
             }
         })

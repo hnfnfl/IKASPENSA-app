@@ -61,5 +61,10 @@
     <string name="save">Simpan</string>
     <string name="setting">Pengaturan</string>
     <string name="no_telp">No Telp</string>
+    <string name="icon_logout">icon logout</string>
+    <string name="logout">Logout</string>
+    <string name="confirm_logout">Apakah Anda yakin ingin logout?</string>
+    <string name="no">Tidak</string>
+    <string name="yes">Ya</string>
 
 </resources>

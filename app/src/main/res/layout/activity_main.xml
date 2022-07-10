@@ -33,6 +33,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
+        android:id="@+id/btn_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/btn_notification"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_notification"
+        app:layout_constraintBottom_toTopOf="@+id/ll_body"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
         android:id="@+id/btn_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,20 +60,6 @@
         app:layout_constraintEnd_toStartOf="@+id/btn_notification"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white" />
-
-    <ImageButton
-        android:id="@+id/btn_notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/btn_notification"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_notification"
-        app:layout_constraintBottom_toTopOf="@+id/ll_body"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/ll_body"
@@ -282,6 +282,46 @@
                             android:fontFamily="sans-serif-medium"
                             android:gravity="center"
                             android:text="@string/alumni"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/btn_logout"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/menu_box"
+                        android:backgroundTint="@color/primaryColor"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/menu_box"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:padding="6dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@string/icon_logout"
+                                android:src="@drawable/ic_power"
+                                app:tint="@color/primaryDarkColor" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="center"
+                            android:text="@string/logout"
                             android:textColor="@color/white"
                             android:textSize="16sp" />
 
