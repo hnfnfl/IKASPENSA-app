@@ -1,8 +1,10 @@
 package com.jaylangkung.ikaspensa.main
 
 import android.Manifest
+import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,7 +15,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.messaging.FirebaseMessaging
 import com.jaylangkung.ikaspensa.R
@@ -60,15 +61,7 @@ class MainActivity : AppCompatActivity() {
         myPreferences = MySharedPreferences(this@MainActivity)
         dashboardAdapter = DashboardAdapter()
 
-        if (ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.CAMERA)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this@MainActivity,
-                arrayOf(Manifest.permission.CAMERA),
-                100
-            )
-        }
+        askPermission()
 
         val nama = myPreferences.getValue(Constants.USER_NAMA)
         val idadmin = myPreferences.getValue(Constants.USER_IDADMIN).toString()
@@ -84,15 +77,18 @@ class MainActivity : AppCompatActivity() {
             .error(R.drawable.ic_profile)
             .into(binding.imgPhoto)
 
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                return@OnCompleteListener
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val token = task.result
+                insertToken(idadmin, token)
+            } else {
+                // Handle the error
+                val exception = task.exception
+                exception?.message?.let {
+                    Log.e(ContentValues.TAG, "Error retrieving FCM registration token: $it")
+                }
             }
-
-            // Get new FCM registration token
-            val deviceToken = task.result
-            insertToken(idadmin, deviceToken.toString())
-        })
+        }
 
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         binding.tvGreetings.text = when (currentHour) {
@@ -423,5 +419,32 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         })
+    }
+
+    private fun askPermission() {
+        val cameraPermission = Manifest.permission.CAMERA
+        val readStoragePermission = Manifest.permission.READ_EXTERNAL_STORAGE
+        val permissionsToRequest = mutableListOf<String>()
+
+        // Check for notification permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+
+        // Check for camera, storage, and location permissions
+        if (ContextCompat.checkSelfPermission(this@MainActivity, cameraPermission) != PackageManager.PERMISSION_GRANTED) {
+            permissionsToRequest.add(cameraPermission)
+        }
+        if (ContextCompat.checkSelfPermission(this@MainActivity, readStoragePermission) != PackageManager.PERMISSION_GRANTED) {
+            permissionsToRequest.add(readStoragePermission)
+        }
+
+        if (permissionsToRequest.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                this@MainActivity, permissionsToRequest.toTypedArray(), 100
+            )
+        }
     }
 }

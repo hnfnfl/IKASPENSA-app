@@ -1,6 +1,8 @@
 package com.jaylangkung.ikaspensa.retrofit
 
 import com.jaylangkung.ikaspensa.retrofit.response.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -75,14 +77,15 @@ interface DataService {
         @Header("Authorization") tokenAuth: String
     ): Call<NotifikasiResponse>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("main/updateProfile")
     fun updateProfile(
-        @Field("nama") nama: String,
-        @Field("alamat") alamat: String,
-        @Field("email") email: String,
-        @Field("telp") telp: String,
-        @Field("idadmin") idadmin: String,
+        @Part("idadmin") idadmin: RequestBody,
+        @Part("nama") nama: RequestBody,
+        @Part("alamat") alamat: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("telp") telp: RequestBody,
+        @Part foto: MultipartBody.Part?,
         @Header("Authorization") tokenAuth: String
     ): Call<DefaultResponse>
 }

@@ -66,5 +66,6 @@
     <string name="confirm_logout">Apakah Anda yakin ingin logout?</string>
     <string name="no">Tidak</string>
     <string name="yes">Ya</string>
+    <string name="change_photo">Ganti Foto</string>
 
 </resources>
