@@ -16,7 +16,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import com.jaylangkung.ikaspensa.R
 import com.jaylangkung.ikaspensa.alumni.AlumniActivity
 import com.jaylangkung.ikaspensa.auth.LoginActivity
@@ -43,7 +44,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.DecimalFormat
-import java.util.*
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             .error(R.drawable.ic_profile)
             .into(binding.imgPhoto)
 
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+        Firebase.messaging.token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val token = task.result
                 insertToken(idadmin, token)
