@@ -88,4 +88,9 @@ interface DataService {
         @Part foto: MultipartBody.Part?,
         @Header("Authorization") tokenAuth: String
     ): Call<DefaultResponse>
+
+    @GET("main/getRekening")
+    fun getRekening(
+        @Header("Authorization") tokenAuth: String
+    ): Call<DefaultResponse>
 }

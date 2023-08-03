@@ -90,7 +90,6 @@
                         android:id="@+id/text_dashboard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
                         android:drawablePadding="8dp"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/dashboard"
@@ -100,12 +99,27 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <TextView
+                        android:id="@+id/text_rekening"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:text="@string/rekening_donasi"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_dashboard" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_dashboard"
                         android:layout_width="match_parent"
                         android:layout_height="300dp"
+                        android:layout_marginTop="10dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_dashboard"
+                        app:layout_constraintTop_toBottomOf="@+id/text_rekening"
                         tools:listitem="@layout/item_dashboard" />
 
                     <com.github.ybq.android.spinkit.SpinKitView

@@ -71,12 +71,7 @@ class MainActivity : AppCompatActivity() {
         val tokenAuth = getString(R.string.token_auth, myPreferences.getValue(Constants.TokenAuth).toString())
         val foto = myPreferences.getValue(Constants.USER_IMG).toString()
 
-        Glide.with(this@MainActivity)
-            .load(foto)
-            .apply(RequestOptions().override(120))
-            .placeholder(R.drawable.ic_profile)
-            .error(R.drawable.ic_profile)
-            .into(binding.imgPhoto)
+        Glide.with(this@MainActivity).load(foto).apply(RequestOptions().override(120)).placeholder(R.drawable.ic_profile).error(R.drawable.ic_profile).into(binding.imgPhoto)
 
         Firebase.messaging.token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -206,8 +201,7 @@ class MainActivity : AppCompatActivity() {
                         getString(R.string.no), R.drawable.ic_close
                     ) { dialogInterface, _ ->
                         dialogInterface.dismiss()
-                    }
-                    .setNegativeButton(
+                    }.setNegativeButton(
                         getString(R.string.yes), R.drawable.ic_logout
                     ) { dialogInterface, _ ->
                         myPreferences.setValue(Constants.USER, "")
@@ -225,8 +219,7 @@ class MainActivity : AppCompatActivity() {
                         startActivity(Intent(this@MainActivity, LoginActivity::class.java))
                         finish()
                         dialogInterface.dismiss()
-                    }
-                    .build()
+                    }.build()
 
                 mDialog.show()
             }
@@ -246,16 +239,14 @@ class MainActivity : AppCompatActivity() {
                     }
                 } else {
                     ErrorHandler().responseHandler(
-                        this@MainActivity,
-                        "insertToken | onResponse", response.message()
+                        this@MainActivity, "insertToken | onResponse", response.message()
                     )
                 }
             }
 
             override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                 ErrorHandler().responseHandler(
-                    this@MainActivity,
-                    "insertToken | onFailure", t.message.toString()
+                    this@MainActivity, "insertToken | onFailure", t.message.toString()
                 )
             }
         })
@@ -287,16 +278,14 @@ class MainActivity : AppCompatActivity() {
                     }
                 } else {
                     ErrorHandler().responseHandler(
-                        this@MainActivity,
-                        "getDashboard | onResponse", response.message()
+                        this@MainActivity, "getDashboard | onResponse", response.message()
                     )
                 }
             }
 
             override fun onFailure(call: Call<DashboardResponse>, t: Throwable) {
                 ErrorHandler().responseHandler(
-                    this@MainActivity,
-                    "getDashboard | onFailure", t.message.toString()
+                    this@MainActivity, "getDashboard | onFailure", t.message.toString()
                 )
             }
         })
@@ -315,28 +304,21 @@ class MainActivity : AppCompatActivity() {
                     }
                 } else {
                     ErrorHandler().responseHandler(
-                        this@MainActivity,
-                        "getSaldo | onResponse", response.message()
+                        this@MainActivity, "getSaldo | onResponse", response.message()
                     )
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 ErrorHandler().responseHandler(
-                    this@MainActivity,
-                    "getSaldo | onFailure", t.message.toString()
+                    this@MainActivity, "getSaldo | onFailure", t.message.toString()
                 )
             }
         })
     }
 
     private fun addDeposit(
-        jumlah: String,
-        idaktivasi: String,
-        idalumnus: String,
-        idadmin: String,
-        tokenAuth: String,
-        dialog: BottomSheetDialog
+        jumlah: String, idaktivasi: String, idalumnus: String, idadmin: String, tokenAuth: String, dialog: BottomSheetDialog
     ) {
         val service = RetrofitClient().apiRequest().create(DataService::class.java)
         service.addDeposit(jumlah, idaktivasi, idalumnus, idadmin, tokenAuth).enqueue(object : Callback<DefaultResponse> {
@@ -348,29 +330,21 @@ class MainActivity : AppCompatActivity() {
                     }
                 } else {
                     ErrorHandler().responseHandler(
-                        this@MainActivity,
-                        "addDeposit | onResponse", response.message()
+                        this@MainActivity, "addDeposit | onResponse", response.message()
                     )
                 }
             }
 
             override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                 ErrorHandler().responseHandler(
-                    this@MainActivity,
-                    "addDeposit | onFailure", t.message.toString()
+                    this@MainActivity, "addDeposit | onFailure", t.message.toString()
                 )
             }
         })
     }
 
     private fun subtractDeposit(
-        jumlah: String,
-        idaktivasi: String,
-        idalumnus: String,
-        keterangan: String,
-        idadmin: String,
-        tokenAuth: String,
-        dialog: BottomSheetDialog
+        jumlah: String, idaktivasi: String, idalumnus: String, keterangan: String, idadmin: String, tokenAuth: String, dialog: BottomSheetDialog
     ) {
         val service = RetrofitClient().apiRequest().create(DataService::class.java)
         service.subtractDeposit(jumlah, idaktivasi, idalumnus, keterangan, idadmin, tokenAuth).enqueue(object : Callback<DefaultResponse> {
@@ -382,16 +356,14 @@ class MainActivity : AppCompatActivity() {
                     }
                 } else {
                     ErrorHandler().responseHandler(
-                        this@MainActivity,
-                        "subtractDeposit | onResponse", response.message()
+                        this@MainActivity, "subtractDeposit | onResponse", response.message()
                     )
                 }
             }
 
             override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                 ErrorHandler().responseHandler(
-                    this@MainActivity,
-                    "subtractDeposit | onFailure", t.message.toString()
+                    this@MainActivity, "subtractDeposit | onFailure", t.message.toString()
                 )
             }
         })
@@ -407,18 +379,40 @@ class MainActivity : AppCompatActivity() {
                     }
                 } else {
                     ErrorHandler().responseHandler(
-                        this@MainActivity,
-                        "logout | onResponse", response.message()
+                        this@MainActivity, "logout | onResponse", response.message()
                     )
                 }
             }
 
             override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                 ErrorHandler().responseHandler(
-                    this@MainActivity,
-                    "logout | onFailure", t.message.toString()
+                    this@MainActivity, "logout | onFailure", t.message.toString()
                 )
             }
+        })
+    }
+
+    private fun getRekening(tokenAuth: String) {
+        val service = RetrofitClient().apiRequest().create(DataService::class.java)
+        service.getRekening(tokenAuth).enqueue(object : Callback<DefaultResponse> {
+            override fun onResponse(call: Call<DefaultResponse>, response: Response<DefaultResponse>) {
+                if (response.isSuccessful) {
+                    if (response.body()!!.status == "success") {
+                        binding.textRekening.text = response.body()!!.message
+                    }
+                } else {
+                    ErrorHandler().responseHandler(
+                        this@MainActivity, "getRekening | onResponse", response.message()
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                ErrorHandler().responseHandler(
+                    this@MainActivity, "getRekening | onFailure", t.message.toString()
+                )
+            }
+
         })
     }
 

@@ -67,5 +67,6 @@
     <string name="no">Tidak</string>
     <string name="yes">Ya</string>
     <string name="change_photo">Ganti Foto</string>
+    <string name="rekening_donasi">Rekening Donasi: %1$s</string>
 
 </resources>
