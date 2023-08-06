@@ -39,7 +39,7 @@
     <string name="saldo_anda_saat_ini">Saldo Anda saat ini</string>
     <string name="icon_deposit">icon deposit</string>
     <string name="deposit">Deposit</string>
-    <string name="icon_tambah_sumbangan">icon tambah sumbangan</string>
+    <string name="icon_tambah_subangan">icon tambah sumbangan</string>
     <string name="tambah_sumbangan">Tambah Sumbangan</string>
     <string name="btn_save">Simpan</string>
     <string name="keterangan">Keterangan</string>
@@ -68,5 +68,11 @@
     <string name="yes">Ya</string>
     <string name="change_photo">Ganti Foto</string>
     <string name="rekening_donasi">Rekening Donasi: %1$s</string>
+    <string name="voting_foto">Voting Foto</string>
+    <string name="icon_voting_foto">icon voting foto</string>
+    <string name="gambar_voting">gambar voting</string>
+    <string name="voting_name_love">%1$s | Love: %2$s</string>
+    <string name="voting_love">Vote</string>
+    <string name="icon_tambah_sumbangan">icon tambah sumbangan</string>
 
 </resources>

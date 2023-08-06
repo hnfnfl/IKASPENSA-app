@@ -93,4 +93,17 @@ interface DataService {
     fun getRekening(
         @Header("Authorization") tokenAuth: String
     ): Call<DefaultResponse>
+
+    @GET("main/getFotoLomba")
+    fun getFotoLomba(
+        @Header("Authorization") tokenAuth: String
+    ): Call<VotingResponse>
+
+    @FormUrlEncoded
+    @POST("main/addLoveFotoLomba")
+    fun addLoveFotoLomba(
+        @Field("idadmin") idadmin: String,
+        @Field("idlomba") idlomba: String,
+        @Header("Authorization") tokenAuth: String
+    ): Call<DefaultResponse>
 }

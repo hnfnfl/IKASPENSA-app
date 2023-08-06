@@ -38,13 +38,14 @@ import com.jaylangkung.ikaspensa.sumbangan.SumbanganActivity
 import com.jaylangkung.ikaspensa.utils.Constants
 import com.jaylangkung.ikaspensa.utils.ErrorHandler
 import com.jaylangkung.ikaspensa.utils.MySharedPreferences
+import com.jaylangkung.ikaspensa.voting.VotingActivity
 import dev.shreyaspatil.MaterialDialog.MaterialDialog
 import es.dmoral.toasty.Toasty
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.DecimalFormat
-import java.util.Calendar
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -71,7 +72,13 @@ class MainActivity : AppCompatActivity() {
         val tokenAuth = getString(R.string.token_auth, myPreferences.getValue(Constants.TokenAuth).toString())
         val foto = myPreferences.getValue(Constants.USER_IMG).toString()
 
-        Glide.with(this@MainActivity).load(foto).apply(RequestOptions().override(120)).placeholder(R.drawable.ic_profile).error(R.drawable.ic_profile).into(binding.imgPhoto)
+        Glide.with(this@MainActivity)
+            .load(foto)
+            .apply(RequestOptions().override(120))
+            .placeholder(R.drawable.ic_profile)
+            .error(R.drawable.ic_profile)
+            .into(binding.imgPhoto)
+        getRekening(tokenAuth)
 
         Firebase.messaging.token.addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -189,6 +196,11 @@ class MainActivity : AppCompatActivity() {
 
             btnAlumni.setOnClickListener {
                 startActivity(Intent(this@MainActivity, AlumniActivity::class.java))
+                finish()
+            }
+
+            btnVotingFoto.setOnClickListener {
+                startActivity(Intent(this@MainActivity, VotingActivity::class.java))
                 finish()
             }
 
@@ -398,7 +410,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<DefaultResponse>, response: Response<DefaultResponse>) {
                 if (response.isSuccessful) {
                     if (response.body()!!.status == "success") {
-                        binding.textRekening.text = response.body()!!.message
+                        binding.textRekening.text = getString(R.string.rekening_donasi, response.body()!!.message)
                     }
                 } else {
                     ErrorHandler().responseHandler(
